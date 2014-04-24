@@ -1,0 +1,48 @@
+doctype html
+html(lang="en")
+  head
+    title Hipster Domain Finder
+    link(href='http://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet')
+    link(href='/index/index.css' rel='stylesheet')
+  body
+    .header
+        img(src='/resources/img.png')
+    .list
+      - var ncBase = 'https://www.namecheap.com/domains/registration/results.aspx?domain='
+      - var ncEnd = '&aff=67093'
+      - for (var i = 0; i < domains.length; i += 3) {
+        - if(i != 0 && i % 12 == 0) {
+          .sep
+        - }
+        .row
+          a(href=ncBase + domains[i].name + ncEnd target='_blank')
+            .domain=domains[i].name
+          - if(domains.length > i + 1) {
+            a(href=ncBase + domains[i+1].name + ncEnd target='_blank')
+              .domain=domains[i+1].name
+          - }
+          - if(domains.length > i + 2) {
+            a(href=ncBase + domains[i+2].name + ncEnd target='_blank')
+              .domain=domains[i+2].name
+          - }
+      - }
+    .page
+      - var prev = parseInt(page) - 1
+      - var next = parseInt(page) + 1
+
+      - if(page > 1) {
+        a(href='/p/' + prev) prev
+      - }
+      - else {
+        a.dull prev
+      - }
+
+      .num=page
+
+      - if(domains.length == 60) {
+        a(href='/p/' + next) next
+      - }
+      - else {
+        a.dull :(
+      - }
