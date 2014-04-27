@@ -1,40 +1,59 @@
-# namecheap api rules:
-# 20 requests per minute, 20 domains per request, 8000 request per day
+#!/usr/bin/python
+# command -> ./check.py <gandi API key>
 
+import sys
 from pymongo import MongoClient
-import requests
+from time import sleep
+import xmlrpclib
+from pprint import pprint
 
 db = MongoClient('localhost', 27017).hipsterdomainfinder
+gandi = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
+key = sys.argv[1]
+gandi.version.info(key)
 
-# .ch doesn't have whois server, emailed robowhois about it
-# namecheap does not support .ly :(
-ext = ('us', 'me', 'co', 'io' , 'ca', 'pw', 'tv', 'in', 'de', 'cc', 'eu', 'cm',
-       'li', 'es', 'pe', 'nu', 'bz', 'fr')
+vowels = ('a', 'e', 'i', 'o', 'u', 'y')
+domains = []
+tlds = gandi.domain.tld.list(key)
+for i, tld in enumerate(tlds):
+    tlds[i] = tld['name']
 
-# extensions where min length is 3
-stupid = ('in', 'us', 'pw', 'in', 'li', 'es', 'fr')
+tlds = tuple(tlds)
 
 with open('popular_words.txt') as dictionary:
     for line in dictionary:
         word = line.strip('\n')
+        chars = list(word)
 
-        if word.endswith(ext):
-            if word[-2:] in stupid and len(word[:-2]) >= 3:
-                short = False
-            elif word[-2:] not in stupid and len(word[:-2]) >= 2:
-                short = False
-            else:
-                short = True
+        if len(word) > 3:
+            if word.endswith(tlds):
+                end = next((suf for suf in tlds if word.endswith(suf)), None)
+                if len(word) > len(end):
+                    chars.insert(-len(end), '.')
+                    domains.append(''.join(chars))
+            
+            elif word.endswith('er') and chars[-3] not in vowels:
+                chars.pop(-2)
+                chars.append('.com')
+                domains.append(''.join(chars))
 
-            if not short:
-                if True: # TODO: available according to namecheap API
-                    chars = list(word)
-                    chars.insert(-2, '.')
-                    name = ''.join(chars)
-                    db.domains.update({'name': name}, {
-                        'name': name,
-                        'ext': word[-2:],
-                        'length': len(name)
-                    }, True)
-                else:
-                    db.domains.remove({'name': name})
+statuses = gandi.domain.available(key, domains)
+available = []
+
+for name in statuses:
+    while statuses[name] == 'pending':
+        sleep(10)
+        statuses = gandi.domain.available(key, domains)
+    if statuses[name] == 'available':
+        print('Adding -> ' + name)
+        db.domains.update({'name': name}, {
+            'name': name,
+            'tld': name.split('.')[1],
+            'length': len(name.split('.')[0])
+        }, True)
+    else:
+        print('Removing -> ' + name)
+        print('    > For reason: ' + statuses[name])
+        db.domains.remove({'name': name})
+
+    print('')

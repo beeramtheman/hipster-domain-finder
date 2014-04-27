@@ -19,16 +19,16 @@ body {
   text-align: center;
 }
 .list .row a {
-  font-family: 'Patrick Hand';
-  font-size: 30px;
+  font-family: 'Inconsolata';
+  font-size: 28px;
   text-decoration: none;
   color: #472d38;
-  transition: color 0.2s, font-size 0.2s;
-  -webkit-transition: color 0.2s, font-size 0.2s;
+  transition: color 0.1s, font-size 0.1s;
+  -webkit-transition: color 0.1s, font-size 0.1s;
 }
 .list .row a:hover {
   color: #d16c5c;
-  font-size: 38px;
+  font-size: 32px;
 }
 .list .sep {
   width: 600px;
