@@ -37,23 +37,72 @@ with open('popular_words.txt') as dictionary:
                 chars.append('.com')
                 domains.append(''.join(chars))
 
-statuses = gandi.domain.available(key, domains)
 available = []
+hold = [] # domains to check later due to rate limit
 
-for name in statuses:
-    while statuses[name] == 'pending':
-        sleep(10)
-        statuses = gandi.domain.available(key, domains)
-    if statuses[name] == 'available':
-        print('Adding -> ' + name)
-        db.domains.update({'name': name}, {
-            'name': name,
-            'tld': name.split('.')[1],
-            'length': len(name.split('.')[0])
-        }, True)
-    else:
-        print('Removing -> ' + name)
-        print('    > For reason: ' + statuses[name])
-        db.domains.remove({'name': name})
+def move_to_hold(end):
+    global domains
+    global hold
 
-    print('')
+    before = len(domains)
+    for name in list(domains):
+        if name.endswith(end):
+            hold.append(name)
+            domains.remove(name)
+    print('Removed ' + str(before - len(domains)) + ' domains')
+
+def check():
+    global domains
+    global hold
+    
+    statuses = gandi.domain.available(key, domains)
+
+    types = [] # types of gandi responses
+
+    while len(domains):
+        name = domains[0]
+
+        if statuses[name] not in types:
+            types.append(statuses[name])
+
+        while statuses[name] == 'pending':
+            print('...pending...')
+            sleep(10)
+            statuses = gandi.domain.available(key, domains)
+
+        if statuses[name] == 'available':
+            print('Adding -> ' + name)
+            db.domains.update({'name': name}, {
+                'name': name,
+                'tld': name.split('.')[1],
+                'length': len(name)
+            }, True)
+            domains.remove(name)
+
+        elif statuses[name] == 'error_unknown':
+            print('Moving -> ' + name + ' and others alike')
+            move_to_hold(name.split('.')[1])
+
+        else:
+            print('Removing -> ' + name)
+            print('    > For reason: ' + statuses[name])
+            db.domains.remove({'name': name})
+            domains.remove(name)
+
+        print('')
+
+    print('types:')
+    pprint(types)
+
+    print('domains: ' + str(len(domains)))
+    print('hold: ' + str(len(hold)))
+
+    if len(hold):
+        print('Sleeping..... ZZzzz')
+        sleep(60 * 60)
+        print('Going again!')
+        domains = list(hold)
+        hold = []
+        check()
+
+check()
