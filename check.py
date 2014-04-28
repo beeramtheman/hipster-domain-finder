@@ -5,6 +5,7 @@ import sys
 from pymongo import MongoClient
 from time import sleep
 import xmlrpclib
+import subprocess
 from pprint import pprint
 
 db = MongoClient('localhost', 27017).hipsterdomainfinder
@@ -17,6 +18,7 @@ domains = []
 tlds = gandi.domain.tld.list(key)
 for i, tld in enumerate(tlds):
     tlds[i] = tld['name']
+tlds.append('ly') # gandi API support .ly :(
 
 tlds = tuple(tlds)
 
@@ -57,42 +59,53 @@ def check():
     
     statuses = gandi.domain.available(key, domains)
 
-    types = [] # types of gandi responses
-
     while len(domains):
         name = domains[0]
 
-        if statuses[name] not in types:
-            types.append(statuses[name])
+        if name.endswith('ly'):
+            whois = subprocess.check_output(['whois', name])
 
-        while statuses[name] == 'pending':
-            print('...pending...')
-            sleep(10)
-            statuses = gandi.domain.available(key, domains)
+            if whois.startswith('Not found'):
+                print('Adding -> ' + name)
+                db.domains.update({'name': name}, {
+                    'name': name,
+                    'tld': 'ly',
+                    'length': len(name)
+                }, True)
+            else:
+                print('Removing -> ' + name)
+                print('    > For reason: ' + 'NOT "available" whois')
+                print('        > ' + whois[:30])
+                db.domains.remove({'name': name})
 
-        if statuses[name] == 'available':
-            print('Adding -> ' + name)
-            db.domains.update({'name': name}, {
-                'name': name,
-                'tld': name.split('.')[1],
-                'length': len(name)
-            }, True)
             domains.remove(name)
-
-        elif statuses[name] == 'error_unknown':
-            print('Moving -> ' + name + ' and others alike')
-            move_to_hold(name.split('.')[1])
 
         else:
-            print('Removing -> ' + name)
-            print('    > For reason: ' + statuses[name])
-            db.domains.remove({'name': name})
-            domains.remove(name)
+            while statuses[name] == 'pending':
+                print('...pending...')
+                sleep(10)
+                statuses = gandi.domain.available(key, domains)
+
+            if statuses[name] == 'available':
+                print('Adding -> ' + name)
+                db.domains.update({'name': name}, {
+                    'name': name,
+                    'tld': name.split('.')[1],
+                    'length': len(name)
+                }, True)
+                domains.remove(name)
+
+            elif statuses[name] == 'error_unknown' or statuses[name] == 'error_timeout':
+                print('Moving -> ' + name + ' and others alike')
+                move_to_hold(name.split('.')[1])
+
+            else:
+                print('Removing -> ' + name)
+                print('    > For reason: ' + statuses[name])
+                db.domains.remove({'name': name})
+                domains.remove(name)
 
         print('')
-
-    print('types:')
-    pprint(types)
 
     print('domains: ' + str(len(domains)))
     print('hold: ' + str(len(hold)))

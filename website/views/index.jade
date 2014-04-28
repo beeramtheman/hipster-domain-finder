@@ -17,23 +17,17 @@ html(lang="en")
           .sep
         - }
         .row
-          - var name1 = domains[i].name
-          - if(name1.split('.')[1] == 'com') name1 = '&nbsp;' + name1
           a(href=ncBase + domains[i].name + ncEnd target='_blank')
-            .domain!=name1
+            .domain=domains[i].name
 
           - if(domains.length > i + 1) {
-            - var name2 = domains[i+1].name
-            - if(name2.split('.')[1] == 'com') name2 = '&nbsp;' + name2
             a(href=ncBase + domains[i+1].name + ncEnd target='_blank')
-              .domain!=name2
+              .domain=domains[i+1].name
           - }
 
           - if(domains.length > i + 2) {
-            - var name3 = domains[i+2].name
-            - if(name3.split('.')[1] == 'com') name3 = '&nbsp;' + name3
             a(href=ncBase + domains[i+2].name + ncEnd target='_blank')
-              .domain!=name3
+              .domain=domains[i+2].name
           - }
       - }
     .page
