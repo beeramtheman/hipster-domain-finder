@@ -24,6 +24,10 @@ app.get('/', function(req, res) {
     sendPage(res, 1);
 });
 
+app.get('/p', function(req, res) {
+    res.redirect('/');
+});
+
 app.get('/p/:page', function(req, res) {
     sendPage(res, req.params.page);
 });

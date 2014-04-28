@@ -1,11 +1,20 @@
 body {
   background-color: #d6d9ba;
   margin: 22px;
-  font-family: 'Nunito';
 }
 .header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
+}
+.subtitle {
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: 'Helvetica' 'Arial';
+  font-size: 16px;
+}
+.subtitle a {
+  color: #00f;
+  text-decoration: none;
 }
 .list .row {
   width: 600px;
@@ -37,6 +46,7 @@ body {
   background-color: #808080;
 }
 .page {
+  font-family: 'Nunito';
   width: 400px;
   height: 40px;
   margin: 50px auto 0 auto;
