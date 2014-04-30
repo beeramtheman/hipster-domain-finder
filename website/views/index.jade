@@ -20,23 +20,22 @@ html(lang="en")
       br
       | Updated every 24 hours.
     .list
-      - var ncBase = 'https://www.namecheap.com/domains/registration/results.aspx?domain='
-      - var ncEnd = '&aff=67093'
+      - var base = 'https://www.gandi.net/domain/buy/result?domain_list='
       - for (var i = 0; i < domains.length; i += 3) {
         - if(i != 0 && i % 12 == 0) {
           .sep
         - }
         .row
-          a(href=ncBase + domains[i].name + ncEnd target='_blank')
+          a(href=base + domains[i].name target='_blank')
             .domain=domains[i].name
 
           - if(domains.length > i + 1) {
-            a(href=ncBase + domains[i+1].name + ncEnd target='_blank')
+            a(href=base + domains[i+1].name target='_blank')
               .domain=domains[i+1].name
           - }
 
           - if(domains.length > i + 2) {
-            a(href=ncBase + domains[i+2].name + ncEnd target='_blank')
+            a(href=base + domains[i+2].name target='_blank')
               .domain=domains[i+2].name
           - }
       - }
@@ -57,5 +56,5 @@ html(lang="en")
         a(href='/p/' + next) next
       - }
       - else {
-        a.dull :(
+        a.dull no more :(
       - }

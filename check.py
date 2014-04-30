@@ -18,7 +18,9 @@ domains = []
 tlds = gandi.domain.tld.list(key)
 for i, tld in enumerate(tlds):
     tlds[i] = tld['name']
-tlds.append('ly') # gandi API support .ly :(
+tlds.remove('za') # .za has no whois server, gandi hasn't worked around it
+tlds.remove('ki') # gandi always returns "available" for .ki even when not
+tlds.append('ly') # have to manually query .ly :(
 
 tlds = tuple(tlds)
 
