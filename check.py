@@ -20,7 +20,7 @@ for i, tld in enumerate(tlds):
     tlds[i] = tld['name']
 tlds.remove('za') # .za has no whois server, gandi hasn't worked around it
 tlds.remove('ki') # gandi always returns "available" for .ki even when not
-tlds.append('ly') # have to manually query .ly :(
+tlds.append('ly') # must manually query .ly (plz gandi)
 
 tlds = tuple(tlds)
 

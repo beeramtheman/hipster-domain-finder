@@ -35,7 +35,7 @@ app.get('/p/:page', function(req, res) {
 function sendPage(res, page) {
     Domain.find().limit(60).skip((page - 1) * 60).sort('length').sort('name')
         .exec(function(err, domains) {
-            if(err) domains = ['db error', 'db error', 'db error'];
+            if(err) domains = [{name: 'databse error'}];
             res.render('index', {
                 domains: domains,
                 page: page
@@ -43,5 +43,9 @@ function sendPage(res, page) {
         }
     );
 }
+
+app.get('/box', function(req, res) {
+    res.render('box', {});
+});
 
 app.listen(1337);
