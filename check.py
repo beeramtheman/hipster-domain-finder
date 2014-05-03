@@ -1,16 +1,19 @@
 #!/usr/bin/python
 # command -> ./check.py <gandi API key>
 
-import sys
+import argparse
 from pymongo import MongoClient
 from time import sleep
 import xmlrpclib
 import subprocess
 from pprint import pprint
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--key', required=True)
+key = parser.parse_args().key
+
 db = MongoClient('localhost', 27017).hipsterdomainfinder
 gandi = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
-key = sys.argv[1]
 gandi.version.info(key)
 
 vowels = ('a', 'e', 'i', 'o', 'u', 'y')
