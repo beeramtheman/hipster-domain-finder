@@ -44,8 +44,4 @@ function sendPage(res, page) {
     );
 }
 
-app.get('/box', function(req, res) {
-    res.render('box', {});
-});
-
 app.listen(1337);
