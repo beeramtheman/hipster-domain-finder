@@ -2,6 +2,7 @@
 # command -> ./check.py <gandi API key>
 
 import argparse
+import os
 from pymongo import MongoClient
 from time import sleep
 import xmlrpclib
@@ -27,7 +28,8 @@ tlds.append('ly') # must manually query .ly (plz gandi)
 
 tlds = tuple(tlds)
 
-with open('popular_words.txt') as dictionary:
+fn = os.path.join(os.path.dirname(__file__), 'popular_words.txt')
+with open(fn) as dictionary:
     for line in dictionary:
         word = line.strip('\n')
         chars = list(word)
