@@ -2,6 +2,7 @@
 # command -> ./check.py <gandi API key>
 
 import argparse
+import sys
 import os
 from pymongo import MongoClient
 from time import sleep
@@ -26,21 +27,26 @@ tlds.remove('za') # .za has no whois server, gandi hasn't worked around it
 tlds = tuple(tlds)
 
 with open('/usr/share/dict/words') as dictionary:
-    for line in dictionary:
+    for i, line in enumerate(dictionary):
+        sys.stdout.write('\r' + str(i).ljust(6) + ' / 234937')
+        sys.stdout.flush()
         word = line.strip('\n').lower()
         chars = list(word)
 
-        if len(word) >= 5: # some false data issues with < 3 letter domains
+        # some false data issues with < 3 letter domains
+        if len(word) >= 5:
             if word.endswith(tlds):
                 end = next((suf for suf in tlds if word.endswith(suf)), None)
                 if len(word) > len(end):
                     chars.insert(-len(end), '.')
-                    domains.append(''.join(chars))
+                    if ''.join(chars) not in domains:
+                        domains.append(''.join(chars))
             
             elif word.endswith('er') and chars[-3] not in vowels:
                 chars.pop(-2)
                 chars.append('.com')
-                domains.append(''.join(chars))
+                if ''.join(chars) not in domains:
+                    domains.append(''.join(chars))
 
 domains.sort(key=len) # check shorter names first (more important)
 available = []
