@@ -17,13 +17,13 @@ body {
   text-decoration: none;
 }
 .list .row {
-  width: 600px;
+  width: 750px;
   height: 50px;
   line-height: 50px;
   margin: 0 auto;
 }
 .list .row .domain {
-  width: 200px;
+  width: 250px;
   float: left;
   text-align: center;
 }

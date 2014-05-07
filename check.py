@@ -23,18 +23,14 @@ tlds = gandi.domain.tld.list(key)
 for i, tld in enumerate(tlds):
     tlds[i] = tld['name']
 tlds.remove('za') # .za has no whois server, gandi hasn't worked around it
-tlds.remove('ki') # gandi always returns "available" for .ki even when not
-tlds.append('ly') # must manually query .ly (plz gandi)
-
 tlds = tuple(tlds)
 
-fn = os.path.join(os.path.dirname(__file__), 'popular_words.txt')
-with open(fn) as dictionary:
+with open('/usr/share/dict/words') as dictionary:
     for line in dictionary:
         word = line.strip('\n')
         chars = list(word)
 
-        if len(word) > 3:
+        if len(word) >= 5: # some false data issues with < 3 letter domains
             if word.endswith(tlds):
                 end = next((suf for suf in tlds if word.endswith(suf)), None)
                 if len(word) > len(end):
@@ -46,6 +42,7 @@ with open(fn) as dictionary:
                 chars.append('.com')
                 domains.append(''.join(chars))
 
+domains.sort(key=len) # check shorter names first (more important)
 available = []
 hold = [] # domains to check later due to rate limit
 
