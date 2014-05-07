@@ -11,4 +11,4 @@ Current hacks:
 
 [HN Discussion](https://news.ycombinator.com/item?id=7707100)
 
-![logo](http://www.hipsterdomainfinder.com/)
+![logo](http://www.hipsterdomainfinder.com/resources/hipster.png)
