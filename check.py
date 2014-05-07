@@ -27,7 +27,7 @@ tlds = tuple(tlds)
 
 with open('/usr/share/dict/words') as dictionary:
     for line in dictionary:
-        word = line.strip('\n')
+        word = line.strip('\n').lower()
         chars = list(word)
 
         if len(word) >= 5: # some false data issues with < 3 letter domains
