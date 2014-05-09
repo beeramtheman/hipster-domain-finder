@@ -32,9 +32,10 @@ def find_domains():
 
     fn = os.path.join(os.path.dirname(__file__), 'words.txt')
     with open(fn) as dictionary:
-        for i, line in enumerate(dictionary):
-            sys.stdout.write('\r' + str(i + 1).ljust(6) + ' / 50000')
-            sys.stdout.flush()
+        for i, line in enumerate(dictionary, 1):
+            if i % 100 == 0:
+                sys.stdout.write('\r' + str(i).ljust(6) + ' / 50000')
+                sys.stdout.flush()
             word = line.strip('\n').lower()
             chars = list(word)
 
