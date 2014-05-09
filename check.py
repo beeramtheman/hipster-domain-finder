@@ -37,9 +37,6 @@ def find_domains():
             word = line.strip('\n').lower()
             chars = list(word)
 
-            if i > 20000:
-                break
-
             if word.endswith(tlds):
                 end = next((suf for suf in tlds if word.endswith(suf)), None)
                 if len(word[:-len(end)]) >= 3:
