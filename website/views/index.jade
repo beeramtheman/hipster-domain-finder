@@ -23,21 +23,22 @@ html(lang="en")
       | Updated every 24 hours.
     .list
       - var base = 'https://www.gandi.net/domain/buy/result?domain_list='
+      // base + domains[i+x].name
       - for (var i = 0; i < domains.length; i += 3) {
         - if(i != 0 && i % 12 == 0) {
           .sep
         - }
         .row
-          a(href=base + domains[i].name target='_blank')
+          a(href='#')
             .domain=domains[i].name
 
           - if(domains.length > i + 1) {
-            a(href=base + domains[i+1].name target='_blank')
+            a(href='#')
               .domain=domains[i+1].name
           - }
 
           - if(domains.length > i + 2) {
-            a(href=base + domains[i+2].name target='_blank')
+            a(href='#')
               .domain=domains[i+2].name
           - }
       - }
