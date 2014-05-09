@@ -19,7 +19,7 @@ def find_domains():
             'cc', 'cd', 'cg', 'ch', 'ci', 'cl', 'cm', 'cn', 'co', 'cr', 'cu',
             'cx', 'de', 'dj', 'dk', 'dm', 'do', 'dz', 'ec', 'ee', 'eg', 'es',
             'eu', 'fi', 'fm', 'fo', 'fr', 'ga', 'gd', 'gf', 'gg', 'gi', 'gl',
-            'gm', 'gn', 'gp', 'gr', 'gs', 'gt', 'gy', 'hm', 'hn', 'hr', 'ht',
+            'gm', 'gp', 'gr', 'gs', 'gt', 'gy', 'hm', 'hn', 'hr', 'ht',
             'hu', 'ie', 'im', 'in', 'io', 'iq', 'is', 'it', 'je', 'jm', 'jo',
             'jp', 'kg', 'ki', 'kn', 'kr', 'ky', 'kz', 'la', 'lc', 'li', 'lk',
             'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
