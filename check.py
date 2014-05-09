@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # command -> ./check.py <gandi API key>
+# note: requires gandi corporate account for access to all TLD's in API
 
 import argparse
 import sys
@@ -30,9 +31,10 @@ def find_domains():
             'tl', 'tm', 'tn', 'to', 'tt', 'tv', 'tw', 'ug', 'us', 'uy', 'uz',
             'vc', 'vi', 'vn', 'vu', 'wf', 'ws', 'yt')
 
-    with open('/usr/share/dict/words') as dictionary:
+    fn = os.path.join(os.path.dirname(__file__), 'words.txt')
+    with open(fn) as dictionary:
         for i, line in enumerate(dictionary):
-            sys.stdout.write('\r' + str(i).ljust(6) + ' / 234937')
+            sys.stdout.write('\r' + str(i+1).ljust(6) + ' / 50000')
             sys.stdout.flush()
             word = line.strip('\n').lower()
             chars = list(word)
