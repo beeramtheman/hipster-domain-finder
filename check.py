@@ -8,8 +8,7 @@ import os
 from pymongo import MongoClient
 from time import sleep
 import xmlrpclib
-import subprocess
-from pprint import pprint
+
 
 def find_domains():
     domains = []
@@ -34,7 +33,7 @@ def find_domains():
     fn = os.path.join(os.path.dirname(__file__), 'words.txt')
     with open(fn) as dictionary:
         for i, line in enumerate(dictionary):
-            sys.stdout.write('\r' + str(i+1).ljust(6) + ' / 50000')
+            sys.stdout.write('\r' + str(i + 1).ljust(6) + ' / 50000')
             sys.stdout.flush()
             word = line.strip('\n').lower()
             chars = list(word)
@@ -46,7 +45,8 @@ def find_domains():
                     if ''.join(chars) not in domains:
                         domains.append(''.join(chars))
 
-            elif word.endswith('er') and len(word) > 3 and chars[-3] not in vowels:
+            elif (word.endswith('er') and len(word) > 3
+                    and chars[-3] not in vowels):
                 chars.pop(-2)
                 chars.append('.com')
                 if ''.join(chars) not in domains:
@@ -54,6 +54,7 @@ def find_domains():
 
     print('\nFound ' + str(len(domains)) + ' domains')
     return domains
+
 
 def get_status(domains):
     new_domains = []
@@ -64,9 +65,9 @@ def get_status(domains):
     for i in xrange(0, len(domains), 500):
         sys.stdout.write('\rGetting status of batch #' + str((i + 500) / 500))
         sys.stdout.flush()
-        batch = gandi.domain.available(key, domains[i:i+500])
+        batch = gandi.domain.available(key, domains[i: i + 500])
         sleep(2)
-        batch = gandi.domain.available(key, domains[i:i+500])
+        batch = gandi.domain.available(key, domains[i: i + 500])
 
         for name in batch:
             if batch[name] == 'pending':
@@ -75,10 +76,11 @@ def get_status(domains):
                 results[name] = batch[name]
                 new_domains.append(name)
 
-        sleep(0.067) # probably not even needed... gandi rate limit
-    
+        sleep(0.067)  # probably not even needed... gandi rate limit
+
     print('\nFinished. Total lost to pending: ' + str(pending))
     return (new_domains, results)
+
 
 def update(domains):
     holding = []
@@ -106,7 +108,8 @@ def update(domains):
             }, True)
             domains.remove(name)
 
-        elif statuses[name] == 'error_unknown' or statuses[name] == 'error_timeout':
+        elif (statuses[name] == 'error_unknown'
+                or statuses[name] == 'error_timeout'):
             print('Holding -> ' + name + ' and others alike')
             move_to_holding(name.split('.')[1])
 
@@ -121,16 +124,18 @@ def update(domains):
         print('Sleeping..... ZZzzz')
         sleep(60 * 30)
         print('Going again!')
-        check(holding)
+        update(holding)
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--key', required=True)
-key = parser.parse_args().key
 
-db = MongoClient('localhost', 27017).hipsterdomainfinder
-gandi = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
-gandi.version.info(key)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--key', required=True)
+    key = parser.parse_args().key
 
-domains = find_domains()
-domains.sort(key=len) # check shorter names first (more important)
-update(domains)
+    db = MongoClient('localhost', 27017).hipsterdomainfinder
+    gandi = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
+    gandi.version.info(key)
+
+    domains = find_domains()
+    domains.sort(key=len)  # check shorter names first (more important)
+    update(domains)
