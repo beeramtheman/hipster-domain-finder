@@ -1,7 +1,7 @@
 # Hipster Domain Finder
 
 Find OG domain hacks with [Hipster Domain
-Finder](https://news.ycombinator.com/item?id=7707100).
+Finder](http://www.hipsterdomainfinder.com).
 
 Current hacks:
 

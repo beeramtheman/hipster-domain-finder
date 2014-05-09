@@ -10,6 +10,120 @@ import xmlrpclib
 import subprocess
 from pprint import pprint
 
+def find_domains():
+    domains = []
+    vowels = ('a', 'e', 'i', 'o', 'u', 'y')
+    tlds = ('ac', 'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'as', 'at', 'ax',
+            'ba', 'bb', 'be', 'bg', 'bi', 'bj', 'bo', 'bs', 'by', 'bz', 'ca',
+            'cc', 'cd', 'cg', 'ch', 'ci', 'cl', 'cm', 'cn', 'co', 'cr', 'cu',
+            'cx', 'de', 'dj', 'dk', 'dm', 'do', 'dz', 'ec', 'ee', 'eg', 'es',
+            'eu', 'fi', 'fm', 'fo', 'fr', 'ga', 'gd', 'gf', 'gg', 'gi', 'gl',
+            'gm', 'gn', 'gp', 'gr', 'gs', 'gt', 'gy', 'hm', 'hn', 'hr', 'ht',
+            'hu', 'ie', 'im', 'in', 'io', 'iq', 'is', 'it', 'je', 'jm', 'jo',
+            'jp', 'kg', 'ki', 'kn', 'kr', 'ky', 'kz', 'la', 'lc', 'li', 'lk',
+            'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
+            'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mu', 'mw', 'mx', 'my', 'na',
+            'nc', 'nf', 'ni', 'nl', 'no', 'nr', 'nu', 'pa', 'pe', 'ph', 'pk',
+            'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'qa', 're', 'ro', 'rs',
+            'ru', 'rw', 'sa', 'sc', 'se', 'sg', 'sh', 'si', 'sk', 'sl', 'sm',
+            'sn', 'so', 'sr', 'st', 'sv', 'sx', 'sy', 'tc', 'tf', 'tj', 'tk',
+            'tl', 'tm', 'tn', 'to', 'tt', 'tv', 'tw', 'ug', 'us', 'uy', 'uz',
+            'vc', 'vi', 'vn', 'vu', 'wf', 'ws', 'yt')
+
+    with open('/usr/share/dict/words') as dictionary:
+        for i, line in enumerate(dictionary):
+            sys.stdout.write('\r' + str(i).ljust(6) + ' / 234937')
+            sys.stdout.flush()
+            word = line.strip('\n').lower()
+            chars = list(word)
+
+            if i > 20000:
+                break
+
+            if word.endswith(tlds):
+                end = next((suf for suf in tlds if word.endswith(suf)), None)
+                if len(word[:-len(end)]) >= 3:
+                    chars.insert(-len(end), '.')
+                    if ''.join(chars) not in domains:
+                        domains.append(''.join(chars))
+
+            elif word.endswith('er') and len(word) > 3 and chars[-3] not in vowels:
+                chars.pop(-2)
+                chars.append('.com')
+                if ''.join(chars) not in domains:
+                    domains.append(''.join(chars))
+
+    print('\nFound ' + str(len(domains)) + ' domains')
+    return domains
+
+def get_status(domains):
+    new_domains = []
+    results = {}
+    pending = 0
+    print(str(len(domains) / 500) + ' bunches...')
+
+    for i in xrange(0, len(domains), 500):
+        sys.stdout.write('\rGetting status of batch #' + str((i + 500) / 500))
+        sys.stdout.flush()
+        batch = gandi.domain.available(key, domains[i:i+500])
+        sleep(2)
+        batch = gandi.domain.available(key, domains[i:i+500])
+
+        for name in batch:
+            if batch[name] == 'pending':
+                pending = pending + 1
+            else:
+                results[name] = batch[name]
+                new_domains.append(name)
+
+        sleep(0.067) # probably not even needed... gandi rate limit
+    
+    print('\nFinished. Total lost to pending: ' + str(pending))
+    return (new_domains, results)
+
+def update(domains):
+    holding = []
+    domains, statuses = get_status(domains)
+
+    def move_to_holding(end):
+        before = len(holding)
+        for name in list(domains):
+            if name.endswith(end):
+                holding.append(name)
+                domains.remove(name)
+        print('"Held" ' + str(len(domains) - before + 1) + ' domains')
+
+    while len(domains):
+        name = domains[0]
+        print(name)
+        print(len(domains))
+
+        if statuses[name] == 'available':
+            print('Adding -> ' + name)
+            db.domains.update({'name': name}, {
+                'name': name,
+                'tld': name.split('.')[1],
+                'length': len(name)
+            }, True)
+            domains.remove(name)
+
+        elif statuses[name] == 'error_unknown' or statuses[name] == 'error_timeout':
+            print('Holding -> ' + name + ' and others alike')
+            move_to_holding(name.split('.')[1])
+
+        else:
+            print('Removing -> ' + name + ' (' + statuses[name] + ')')
+            db.domains.remove({'name': name})
+            domains.remove(name)
+
+    if len(holding):
+        print('Holding: ' + str(len(holding)))
+        print(holding)
+        print('Sleeping..... ZZzzz')
+        sleep(60 * 30)
+        print('Going again!')
+        check(holding)
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--key', required=True)
 key = parser.parse_args().key
@@ -18,114 +132,6 @@ db = MongoClient('localhost', 27017).hipsterdomainfinder
 gandi = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 gandi.version.info(key)
 
-vowels = ('a', 'e', 'i', 'o', 'u', 'y')
-domains = []
-tlds = gandi.domain.tld.list(key)
-for i, tld in enumerate(tlds):
-    tlds[i] = tld['name']
-tlds.remove('za') # .za has no whois server, gandi hasn't worked around it
-tlds = tuple(tlds)
-
-with open('/usr/share/dict/words') as dictionary:
-    for i, line in enumerate(dictionary):
-        sys.stdout.write('\r' + str(i).ljust(6) + ' / 234937')
-        sys.stdout.flush()
-        word = line.strip('\n').lower()
-        chars = list(word)
-
-        # some false data issues with < 3 letter domains
-        if len(word) >= 5:
-            if word.endswith(tlds):
-                end = next((suf for suf in tlds if word.endswith(suf)), None)
-                if len(word) > len(end):
-                    chars.insert(-len(end), '.')
-                    if ''.join(chars) not in domains:
-                        domains.append(''.join(chars))
-            
-            elif word.endswith('er') and chars[-3] not in vowels:
-                chars.pop(-2)
-                chars.append('.com')
-                if ''.join(chars) not in domains:
-                    domains.append(''.join(chars))
-
+domains = find_domains()
 domains.sort(key=len) # check shorter names first (more important)
-available = []
-hold = [] # domains to check later due to rate limit
-
-def move_to_hold(end):
-    global domains
-    global hold
-
-    before = len(domains)
-    for name in list(domains):
-        if name.endswith(end):
-            hold.append(name)
-            domains.remove(name)
-    print('Removed ' + str(before - len(domains)) + ' domains')
-
-def check():
-    global domains
-    global hold
-    
-    statuses = gandi.domain.available(key, domains)
-
-    while len(domains):
-        name = domains[0]
-
-        if name.endswith('ly'):
-            whois = subprocess.check_output(['whois', name])
-
-            if whois.startswith('Not found'):
-                print('Adding -> ' + name)
-                db.domains.update({'name': name}, {
-                    'name': name,
-                    'tld': 'ly',
-                    'length': len(name)
-                }, True)
-            else:
-                print('Removing -> ' + name)
-                print('    > For reason: ' + 'NOT "available" whois')
-                print('        > ' + whois[:30])
-                db.domains.remove({'name': name})
-
-            domains.remove(name)
-
-        else:
-            while statuses[name] == 'pending':
-                print('...pending...')
-                sleep(10)
-                statuses = gandi.domain.available(key, domains)
-
-            if statuses[name] == 'available':
-                print('Adding -> ' + name)
-                db.domains.update({'name': name}, {
-                    'name': name,
-                    'tld': name.split('.')[1],
-                    'length': len(name)
-                }, True)
-                domains.remove(name)
-
-            elif statuses[name] == 'error_unknown' or statuses[name] == 'error_timeout':
-                print('Moving -> ' + name + ' and others alike')
-                move_to_hold(name.split('.')[1])
-
-            else:
-                print('Removing -> ' + name)
-                print('    > For reason: ' + statuses[name])
-                db.domains.remove({'name': name})
-                domains.remove(name)
-
-        print('')
-
-    print('domains: ' + str(len(domains)))
-    print('hold: ' + str(len(hold)))
-
-    if len(hold):
-        print('Sleeping..... ZZzzz')
-        sleep(60 * 60)
-        print('Going again!')
-        domains = list(hold)
-        hold = []
-        check()
-
-check()
+update(domains)
