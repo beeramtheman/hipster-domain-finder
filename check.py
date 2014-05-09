@@ -58,29 +58,51 @@ def find_domains():
 
 
 def get_status(domains):
-    new_domains = []
+    total = len(domains)
     results = {}
-    pending = 0
-    print(str(len(domains) / 500) + ' bunches...')
 
-    for i in xrange(0, len(domains), 500):
-        sys.stdout.write('\rGetting status of batch #' + str((i + 500) / 500))
-        sys.stdout.flush()
-        batch = gandi.domain.available(key, domains[i: i + 500])
-        sleep(2)
-        batch = gandi.domain.available(key, domains[i: i + 500])
+    for domain, status in domain_available_sync(domains):
+        results[domain] = status
 
-        for name in batch:
-            if batch[name] == 'pending':
-                pending = pending + 1
-            else:
-                results[name] = batch[name]
-                new_domains.append(name)
+        if len(results) % 100 == 0:
+            sys.stdout.write('\r%6d/%6d' % (len(results), total))
+            sys.stdout.flush()
 
-        sleep(0.067)  # probably not even needed... gandi rate limit
+    print('\rFinished %6d domains' % total)
+    return results.keys(), results
 
-    print('\nFinished. Total lost to pending: ' + str(pending))
-    return (new_domains, results)
+
+def domain_available_sync(fqdns):
+    """Check domain names using Gandi API, in a synchronous manner
+
+    :param fqdns: enumerable
+    :return: generator, yielding (fqdn, status) tuples
+
+    Basic usage::
+
+        domains = dict(domain_available_sync(fqdns))
+
+    """
+    MAX_QUEUED = 100
+    DELAY = 0.5
+
+    if not fqdns:  # Just in case
+        raise StopIteration
+
+    # Force unique items
+    todo = list(set(fqdns))
+    while todo:
+        res = gandi.domain.available(key, todo[:MAX_QUEUED])
+        for fqdn, status in res.items():
+            if status == 'pending':
+                continue
+            todo.remove(fqdn)
+
+            yield fqdn, status
+
+        if not todo:  # Avoid delay sleep for last item
+            break
+        sleep(DELAY)
 
 
 def update(domains):
