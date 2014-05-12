@@ -21,7 +21,7 @@ def find_domains():
             'gm', 'gp', 'gr', 'gs', 'gt', 'gy', 'hm', 'hn', 'hr', 'ht',
             'hu', 'ie', 'im', 'in', 'io', 'iq', 'is', 'it', 'je', 'jm', 'jo',
             'jp', 'kg', 'ki', 'kn', 'kr', 'ky', 'kz', 'la', 'lc', 'li', 'lk',
-            'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
+            'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
             'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mu', 'mw', 'mx', 'my', 'na',
             'nc', 'nf', 'ni', 'nl', 'no', 'nr', 'nu', 'pa', 'pe', 'ph', 'pk',
             'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'qa', 're', 'ro', 'rs',
@@ -38,6 +38,9 @@ def find_domains():
                 sys.stdout.flush()
             word = line.strip('\n').lower()
             chars = list(word)
+
+            if i > 4000:
+                break
 
             if word.endswith(tlds):
                 end = next((suf for suf in tlds if word.endswith(suf)), None)
