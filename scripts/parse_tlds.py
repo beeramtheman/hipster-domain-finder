@@ -1,7 +1,5 @@
 # Convert the TLD's Gandi supports into valid JSON of only the TLD's HDF uses
 # This script can be modified for other registrars
-# NOTE: In the case of Gandi you must also use their API to eliminate corporate
-# only TLDs.
 
 import requests
 from bs4 import BeautifulSoup
@@ -36,3 +34,5 @@ for tbody in dom.find_all('tbody'):
             registrar_tlds.append(tld[1:])
 
 print(json.dumps(registrar_tlds))
+# NOTE: In this case of Gandi you must also use their API to eliminate
+# corporate only TLDs.
