@@ -1,21 +1,74 @@
 {
     "gandi": {
         "link": "https://www.gandi.net/domain/buy/result?domain_list={{d}}",
-        "tlds": ["je", "jp", "cx", "ro", "re", "ch", "cm", "co", "cn", "ca", "cc", "ru", "lt", "ki", "lv", "de", "sc", "dk", "se", "sx", "la", "lc", "pt", "hn", "pw", "pe", "ph", "pl", "at", "am", "ag", "af", "io", "in", "im", "it", "bz", "li", "be", "no", "nl", "nf", "so", "vc", "nu", "gd", "gg", "gs", "gr", "gy", "ws", "yt", "lu", "tv", "tw", "tl", "tf", "tc", "ms", "mu", "ht", "mx", "pm", "mg", "me", "es", "mn", "eu", "us", "fm", "fi", "wf", "fr"]
+        "tlds": [
+            "je", "jp", "cx", "ro", "re", "ch", "cm", "co", "cn", "ca", "cc",
+            "ru", "lt", "ki", "lv", "de", "sc", "dk", "se", "sx", "la", "lc",
+            "pt", "hn", "pw", "pe", "ph", "pl", "at", "am", "ag", "af", "io",
+            "in", "im", "it", "bz", "li", "be", "no", "nl", "nf", "so", "vc",
+            "nu", "gd", "gg", "gs", "gr", "gy", "ws", "yt", "lu", "tv", "tw",
+            "tl", "tf", "tc", "ms", "mu", "ht", "mx", "pm", "mg", "me", "es",
+            "mn", "eu", "us", "fm", "fi", "wf", "fr"
+        ]
     },
 
     "namecheap": {
+        "NOTE": "not currently using namecheap because it has a very limited range of tlds",
         "link": "https://www.namecheap.com/domains/registration/results.aspx?domain={{d}}",
-        "tlds": ["me", "pe", "fr", "ch", "co", "pw", "cm", "tv", "ca", "de", "us", "li", "cc", "ws", "bz", "io", "in", "eu", "sg", "nu", "es"]
+        "tlds": [
+            "me", "pe", "fr", "ch", "co", "pw", "cm", "tv", "ca", "de", "us",
+            "li", "cc", "ws", "bz", "io", "in", "eu", "sg", "nu", "es"
+        ]
     },
 
     "name": {
         "link": "https://www.name.com/domain/search/?domain={{d}}",
-        "tlds": ["tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx", "de", "fr", "so", "be", "ws", "cc", "bz", "ch", "li", "tl", "gs", "sh", "cm", "sc", "re", "fm", "tw", "mn", "hn", "ag", "am", "jp", "cx", "ec", "gy", "pm", "se", "tf", "wf", "yt", "la"]
+        "tlds": [
+            "tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx",
+            "de", "fr", "so", "be", "ws", "cc", "bz", "ch", "li", "tl", "gs",
+            "sh", "cm", "sc", "re", "fm", "tw", "mn", "hn", "ag", "am", "jp",
+            "cx", "ec", "gy", "pm", "se", "tf", "wf", "yt", "la"
+        ]
     },
 
     "iwantmyname": {
         "link": "https://iwantmyname.com/?domain={{d}}",
-        "tlds": ["co", "co", "me", "me", "io", "io", "us", "us", "ca", "ca", "ac", "ac", "af", "af", "ag", "ag", "am", "am", "as", "as", "at", "at", "be", "be", "bz", "bz", "cc", "cc", "ch", "ch", "cl", "cl", "cm", "cm", "cx", "cx", "de", "de", "dk", "dk", "ec", "ec", "es", "es", "fm", "fm", "fr", "fr", "gd", "gd", "gg", "gg", "gl", "gl", "gr", "gr", "gs", "gs", "gy", "gy", "hn", "hn", "ht", "ht", "im", "im", "in", "in", "is", "is", "it", "it", "je", "je", "jp", "jp", "la", "la", "lc", "lc", "li", "li", "lt", "lt", "lu", "lu", "lv", "lv", "mn", "mn", "ms", "ms", "mu", "mu", "mx", "mx", "my", "my", "nl", "nl", "nu", "nu", "pe", "pe", "ph", "ph", "pl", "pl", "pm", "pm", "pt", "pt", "pw", "pw", "re", "re", "sc", "sc", "se", "se", "sg", "sg", "sh", "sh", "so", "so", "sx", "sx", "tc", "tc", "tf", "tf", "tk", "tk", "tl", "tl", "to", "to", "tv", "tv", "tw", "tw", "vc", "vc", "wf", "wf", "ws", "ws", "yt", "yt"]
+        "tlds": [
+            "co", "co", "me", "me", "io", "io", "us", "us", "ca", "ca", "ac",
+            "ac", "af", "af", "ag", "ag", "am", "am", "as", "as", "at", "at",
+            "be", "be", "bz", "bz", "cc", "cc", "ch", "ch", "cl", "cl", "cm",
+            "cm", "cx", "cx", "de", "de", "dk", "dk", "ec", "ec", "es", "es",
+            "fm", "fm", "fr", "fr", "gd", "gd", "gg", "gg", "gl", "gl", "gr",
+            "gr", "gs", "gs", "gy", "gy", "hn", "hn", "ht", "ht", "im", "im",
+            "in", "in", "is", "is", "it", "it", "je", "je", "jp", "jp", "la",
+            "la", "lc", "lc", "li", "li", "lt", "lt", "lu", "lu", "lv", "lv",
+            "mn", "mn", "ms", "ms", "mu", "mu", "mx", "mx", "my", "my", "nl",
+            "nl", "nu", "nu", "pe", "pe", "ph", "ph", "pl", "pl", "pm", "pm",
+            "pt", "pt", "pw", "pw", "re", "re", "sc", "sc", "se", "se", "sg",
+            "sg", "sh", "sh", "so", "so", "sx", "sx", "tc", "tc", "tf", "tf",
+            "tk", "tk", "tl", "tl", "to", "to", "tv", "tv", "tw", "tw", "vc",
+            "vc", "wf", "wf", "ws", "ws", "yt", "yt"
+        ]
+    },
+
+    "onezeroone": {
+        "link": "http://www.101domain.com/domain-availability-search.htm?q={{d}}",
+        "tlds": [
+            "ac", "ae", "af", "ag", "ai", "al", "am", "as", "at", "ax", "ba",
+            "bb", "be", "bg", "bi", "bj", "bo", "bs", "by", "bz", "ca", "cc",
+            "cd", "cg", "ch", "ci", "cl", "cm", "cn", "co", "cr", "cx", "de",
+            "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "es", "eu", "fi",
+            "fm", "fo", "fr", "ga", "gd", "gf", "gg", "gi", "gl", "gm", "gp",
+            "gr", "gs", "gt", "gy", "hm", "hn", "hr", "ht", "hu", "ie", "im",
+            "in", "io", "iq", "is", "it", "je", "jo", "jp", "kg", "ki", "kn",
+            "kr", "ky", "kz", "la", "lc", "li", "lk", "lt", "lu", "lv", "ly",
+            "ma", "mc", "md", "me", "mg", "ml", "mn", "mo", "mp", "mq", "mr",
+            "ms", "mu", "mw", "mx", "my", "na", "nc", "nf", "ni", "nl", "no",
+            "nr", "nu", "pa", "pe", "ph", "pk", "pl", "pm", "pn", "pr", "ps",
+            "pt", "pw", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sc", "se",
+            "sg", "sh", "si", "sk", "sl", "sm", "sn", "so", "sr", "st", "sv",
+            "sx", "tc", "tf", "tj", "tk", "tl", "tm", "tn", "to", "tt", "tv",
+            "tw", "ug", "us", "uy", "uz", "vc", "vn", "vu", "wf", "ws", "yt"
+        ]
     }
 }
