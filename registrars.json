@@ -1,5 +1,5 @@
 {
-    "gandi": {
-        ['je', 'jp', 'cx', 'ro', 're', 'ch', 'cm', 'co', 'cn', 'ca', 'cc', 'ru', 'lt', 'ki', 'lv', 'de', 'sc', 'dk', 'se', 'sx', 'la', 'lc', 'pt', 'hn', 'pw', 'pe', 'ph', 'pl', 'at', 'am', 'ag', 'af', 'io', 'in', 'im', 'it', 'bz', 'li', 'be', 'no', 'nl', 'nf', 'so', 'vc', 'nu', 'gd', 'gg', 'gs', 'gr', 'gy', 'ws', 'yt', 'lu', 'tv', 'tw', 'tl', 'tf', 'tc', 'ms', 'mu', 'ht', 'mx', 'pm', 'mg', 'me', 'es', 'mn', 'eu', 'us', 'fm', 'fi', 'wf', 'fr']
-    }
+    "gandi": ["je", "jp", "cx", "ro", "re", "ch", "cm", "co", "cn", "ca", "cc", "ru", "lt", "ki", "lv", "de", "sc", "dk", "se", "sx", "la", "lc", "pt", "hn", "pw", "pe", "ph", "pl", "at", "am", "ag", "af", "io", "in", "im", "it", "bz", "li", "be", "no", "nl", "nf", "so", "vc", "nu", "gd", "gg", "gs", "gr", "gy", "ws", "yt", "lu", "tv", "tw", "tl", "tf", "tc", "ms", "mu", "ht", "mx", "pm", "mg", "me", "es", "mn", "eu", "us", "fm", "fi", "wf", "fr"],
+
+    "namecheap": ["ca", "de", "me", "us", "in", "es", "eu", "co", "tv", "pw", "io", "co", "co", "me", "me", "ca", "fr", "de", "sg", "in", "es", "ch", "eu", "nu", "tv", "li", "pw", "pe", "bz", "cc", "cm", "ws", "co", "co", "me"]
 }
