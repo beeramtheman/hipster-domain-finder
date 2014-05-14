@@ -33,7 +33,7 @@ app.get('/p', function(req, res) {
 
 app.get('/p/:page', function(req, res) {
     if(req.query.d) {
-        //
+        // send page with SmartRegistrar box pre-loaded (not JS)
     }
     else {
         sendPage(res, req.params.page);
@@ -43,7 +43,7 @@ app.get('/p/:page', function(req, res) {
 function sendPage(res, page) {
     Domain.find().limit(60).skip((page - 1) * 60).sort('length').sort('name')
         .exec(function(err, domains) {
-            if(err) domains = [{name: 'databse error'}];
+            if(err) domains = [{name: 'database error'}];
             res.render('index', {
                 domains: domains,
                 registrars: registrars,
