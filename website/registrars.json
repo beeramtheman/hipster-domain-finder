@@ -1,0 +1,16 @@
+{
+    "gandi": {
+        "link": "https://www.gandi.net/domain/buy/result?domain_list={{d}}",
+        "tlds": ["je", "jp", "cx", "ro", "re", "ch", "cm", "co", "cn", "ca", "cc", "ru", "lt", "ki", "lv", "de", "sc", "dk", "se", "sx", "la", "lc", "pt", "hn", "pw", "pe", "ph", "pl", "at", "am", "ag", "af", "io", "in", "im", "it", "bz", "li", "be", "no", "nl", "nf", "so", "vc", "nu", "gd", "gg", "gs", "gr", "gy", "ws", "yt", "lu", "tv", "tw", "tl", "tf", "tc", "ms", "mu", "ht", "mx", "pm", "mg", "me", "es", "mn", "eu", "us", "fm", "fi", "wf", "fr"]
+    },
+
+    "namecheap": {
+        "link": "https://www.namecheap.com/domains/registration/results.aspx?domain={{d}}",
+        "tlds": ["me", "pe", "fr", "ch", "co", "pw", "cm", "tv", "ca", "de", "us", "li", "cc", "ws", "bz", "io", "in", "eu", "sg", "nu", "es"]
+    },
+
+    "name": {
+        "link": "https://www.name.com/domain/search/?domain={{d}}",
+        "tlds": ["tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx", "de", "fr", "so", "be", "ws", "cc", "bz", "ch", "li", "tl", "gs", "sh", "cm", "sc", "re", "fm", "tw", "mn", "hn", "ag", "am", "jp", "cx", "ec", "gy", "pm", "se", "tf", "wf", "yt", "la"]
+    }
+}
