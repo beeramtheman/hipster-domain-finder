@@ -3,5 +3,5 @@
 
     "namecheap": ["ca", "de", "me", "us", "in", "es", "eu", "co", "tv", "pw", "io", "co", "co", "me", "me", "ca", "fr", "de", "sg", "in", "es", "ch", "eu", "nu", "tv", "li", "pw", "pe", "bz", "cc", "cm", "ws", "co", "co", "me"],
 
-    "name": ['tv', 'co', 'io', 'me', 'in', 'us', 'vc', 'im', 'ca', 'eu', 'mx', 'de', 'fr', 'so', 'be', 'ws', 'cc', 'bz', 'ch', 'li', 'tl', 'gs', 'sh', 'cm', 'sc', 're', 'fm', 'tw', 'mn', 'hn', 'ag', 'am', 'jp', 'cx', 'ec', 'gy', 'pm', 'se', 'tf', 'wf', 'yt', 'la']
+    "name": ["tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx", "de", "fr", "so", "be", "ws", "cc", "bz", "ch", "li", "tl", "gs", "sh", "cm", "sc", "re", "fm", "tw", "mn", "hn", "ag", "am", "jp", "cx", "ec", "gy", "pm", "se", "tf", "wf", "yt", "la"]
 }
