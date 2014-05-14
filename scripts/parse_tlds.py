@@ -1,5 +1,7 @@
 # Convert the TLD's Gandi supports into valid JSON of only the TLD's HDF uses
 # This script can be modified for other registrars
+# NOTE: In the case of Gandi you must also use their API to eliminate corporate
+# only TLDs.
 
 import requests
 from bs4 import BeautifulSoup
@@ -13,7 +15,7 @@ hdf_tlds = ['ac', 'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'as', 'at', 'ax',
             'gm', 'gp', 'gr', 'gs', 'gt', 'gy', 'hm', 'hn', 'hr', 'ht',
             'hu', 'ie', 'im', 'in', 'io', 'iq', 'is', 'it', 'je', 'jm', 'jo',
             'jp', 'kg', 'ki', 'kn', 'kr', 'ky', 'kz', 'la', 'lc', 'li', 'lk',
-            'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
+            'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mg', 'ml',
             'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mu', 'mw', 'mx', 'my', 'na',
             'nc', 'nf', 'ni', 'nl', 'no', 'nr', 'nu', 'pa', 'pe', 'ph', 'pk',
             'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'qa', 're', 'ro', 'rs',
@@ -31,6 +33,6 @@ for tbody in dom.find_all('tbody'):
     for th in tbody.find_all('th'):
         tld = th.text.replace(' ', '')
         if tld in hdf_tlds:
-            registrar_tlds.append(tld)
+            registrar_tlds.append(tld[1:])
 
 print(json.dumps(registrar_tlds))
