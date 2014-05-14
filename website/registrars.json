@@ -12,5 +12,10 @@
     "name": {
         "link": "https://www.name.com/domain/search/?domain={{d}}",
         "tlds": ["tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx", "de", "fr", "so", "be", "ws", "cc", "bz", "ch", "li", "tl", "gs", "sh", "cm", "sc", "re", "fm", "tw", "mn", "hn", "ag", "am", "jp", "cx", "ec", "gy", "pm", "se", "tf", "wf", "yt", "la"]
+    },
+
+    "iwantmyname": {
+        "link": "https://iwantmyname.com/?domain={{d}}",
+        "tlds": ["co", "co", "me", "me", "io", "io", "us", "us", "ca", "ca", "ac", "ac", "af", "af", "ag", "ag", "am", "am", "as", "as", "at", "at", "be", "be", "bz", "bz", "cc", "cc", "ch", "ch", "cl", "cl", "cm", "cm", "cx", "cx", "de", "de", "dk", "dk", "ec", "ec", "es", "es", "fm", "fm", "fr", "fr", "gd", "gd", "gg", "gg", "gl", "gl", "gr", "gr", "gs", "gs", "gy", "gy", "hn", "hn", "ht", "ht", "im", "im", "in", "in", "is", "is", "it", "it", "je", "je", "jp", "jp", "la", "la", "lc", "lc", "li", "li", "lt", "lt", "lu", "lu", "lv", "lv", "mn", "mn", "ms", "ms", "mu", "mu", "mx", "mx", "my", "my", "nl", "nl", "nu", "nu", "pe", "pe", "ph", "ph", "pl", "pl", "pm", "pm", "pt", "pt", "pw", "pw", "re", "re", "sc", "sc", "se", "se", "sg", "sg", "sh", "sh", "so", "so", "sx", "sx", "tc", "tc", "tf", "tf", "tk", "tk", "tl", "tl", "to", "to", "tv", "tv", "tw", "tw", "vc", "vc", "wf", "wf", "ws", "ws", "yt", "yt"]
     }
 }
