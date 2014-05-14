@@ -2,6 +2,7 @@ var express = require('express')
 var mongoose = require('mongoose');
 var jade = require('jade');
 var stylus = require('stylus');
+var fs = require('fs');
 
 var app = express();
 app.set('views', __dirname + '/views');
@@ -20,6 +21,8 @@ var Domain = mongoose.model('Domain', {
     name: String, ext: String
 });
 
+var registrars = fs.readFileSync(__dirname + '/registrars.json', 'utf8');
+
 app.get('/', function(req, res) {
     sendPage(res, 1);
 });
@@ -29,7 +32,12 @@ app.get('/p', function(req, res) {
 });
 
 app.get('/p/:page', function(req, res) {
-    sendPage(res, req.params.page);
+    if(req.query.d) {
+        //
+    }
+    else {
+        sendPage(res, req.params.page);
+    }
 });
 
 function sendPage(res, page) {
@@ -38,6 +46,7 @@ function sendPage(res, page) {
             if(err) domains = [{name: 'databse error'}];
             res.render('index', {
                 domains: domains,
+                registrars: registrars,
                 page: page
             });
         }

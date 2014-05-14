@@ -22,23 +22,21 @@ html(lang="en")
       br
       | Updated every 24 hours.
     .list
-      - var base = 'https://www.gandi.net/domain/buy/result?domain_list='
-      // base + domains[i+x].name
       - for (var i = 0; i < domains.length; i += 3) {
         - if(i != 0 && i % 12 == 0) {
           .sep
         - }
         .row
-          a(href='#')
+          a(href='?d=' + domains[i].name)
             .domain=domains[i].name
 
           - if(domains.length > i + 1) {
-            a(href='#')
+            a(href='?d=' + domains[i+1].name)
               .domain=domains[i+1].name
           - }
 
           - if(domains.length > i + 2) {
-            a(href='#')
+            a(href='?d=' + domains[i+2].name)
               .domain=domains[i+2].name
           - }
       - }
@@ -63,11 +61,34 @@ html(lang="en")
       - }
     a.twitter(href='https://twitter.com/coffeecodecouch')
       img(src='/resources/twitter.png')
-    div.footer
+    .footer
       a(href='http://www.gandi.net')
         | Proudly made using 
         span Gandi
         | 's API
+
+    .info-bg
+    .info
+      .domain.title
+      .content
+        div.list
+          | Buy: 
+          a.reg.gandi(href='#') Gandi
+          a.reg.iwantmyname(href='#') iWantMyName
+          a.reg.name(href='#') Name.com
+          a.reg.onezeroone(href='#') 101domain
+        br
+        | Tweet about this domain:
+        br
+        form.tweet(action='https://twitter.com/intent/tweet' method='get' target='_blank')
+          span.new-tweet [?] 
+          input.text(type='text' name='text')
+          input(type='hidden' name='url' value='http://www.hipsterdomainfinder.com')
+          input(type='submit' value='tweet')
+
+    #registrars(style='display:none')=registrars
+    script(src='/resources/jquery.min.js')
+    script(src='/index/index.js')
 
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
