@@ -88,7 +88,7 @@ html(lang="en")
         | Tweet about this domain:
         br
         form.tweet(action='https://twitter.com/intent/tweet' method='get' target='_blank')
-          span.new-tweet [?] 
+          img(src='/resources/new.png').new-tweet
           input.text(type='text' name='text')
           input(type='hidden' name='url' value='http://www.hipsterdomainfinder.com')
           input(type='submit' value='tweet')

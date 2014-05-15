@@ -1,8 +1,23 @@
-purely_plumage = #472D38
-hipster_in_blue = #72AD97
+near-black = #3b3b3b
+near-blue = #57A6EB
+nearer-blue = #1879cd
+purely-plumage = #472D38
+hipster-in-blue = #72AD97
 khaki = #D6D9BA
-beautfy_nude = #E6AF83
-peach_dream_machine = #D16C5C
+beauty-node = #E6AF83
+peach-dream-machine = #D16C5C
+lighter-dream = #d77e70
+
+@-moz-keyframes spin
+    100%
+        -moz-transform:rotate(360deg)
+@-webkit-keyframes spin
+    100%
+        -webkit-transform:rotate(360deg)
+@keyframes spin
+    100%
+        -webkit-transform:rotate(360deg)
+        transform:rotate(360deg)
 
 body
     background-color khaki
@@ -41,12 +56,12 @@ a
             font-family 'Inconsolata', 'Arial', 'Helvetica'
             font-size 28px
             text-decoration none
-            color purely_plumage
+            color purely-plumage
             transition color 0.1s, font-size 0.1s
             -webkit-transition color 0.1s, font-size 0.1s
 
             &:hover
-                color peach_dream_machine
+                color peach-dream-machine
                 font-size 32px
 
     .sep
@@ -78,7 +93,7 @@ a
         width 33.33%
         border-radius 5px
         font-size 20px
-        background-color beautfy_nude
+        background-color beauty-node
         transition background-color 0.2s
         -webkit-transition background-color 0.2s
 
@@ -86,7 +101,7 @@ a
             opacity 0.5
 
         &:not(.dull):hover
-            background-color hipster_in_blue
+            background-color hipster-in-blue
 
 .twitter
     position relative
@@ -108,7 +123,7 @@ a
 
     a
         text-decoration none
-        color peach_dream_machine
+        color peach-dream-machine
         opacity 0.5
         transition opacity 0.3s
         -webkit-transition opacity 0.3s
@@ -127,7 +142,7 @@ a
     left 0
     width 100%
     height 100%
-    background-color black
+    background-color white
     cursor pointer
 
 .info
@@ -143,32 +158,32 @@ a
     height 200px
     border 3px solid black
     border-radius 5px
+    text-align center
     background-color white
     transition opacity 0.5s
     -webkit-transition opacity 0.5s
 
     .title
         margin-bottom 8px
-        background-color peach_dream_machine
+        background-color peach-dream-machine
         font-family 'Nunito', 'Arial', 'Helvetica'
         font-size 24px
         color white
         padding 2px
-        text-align center
 
     .content
         padding 8px
 
     .list
-        text-align center
         font-weight bold
+        margin-bottom 10px
 
         .reg
             margin 0 4px
             border 1px solid black
             border-radius 4px
             padding 5px
-            background-color hipster_in_blue
+            background-color hipster-in-blue
             color white
 
             &:not(.true)
@@ -176,10 +191,52 @@ a
                 cursor default
 
     .tweet
+        margin-top 14px
+
         span
             cursor pointer
 
+        input
+            box-sizing content-box
+            height 30px
+            border 2px solid near-black
+            border-radius 4px
+
+        .new-tweet
+            margin-right 5px
+            width 30px
+            height 30px
+            vertical-align middle
+            cursor pointer
+
+            transition transform 0.3s
+            -webkit-transition transform 0.3s
+
+            &:hover
+                -webkit-animation spin 0.3s linear 1
+                -moz-animation spin 0.3s linear 1
+                animation spin 0.3s linear 1
+
         .text
             width 300px
-            height 30px
+            padding-left 4px
+            font-size 16px
+            transition border-color 0.2s
+            -webkit-transition border-color 0.2s
+
+            &:hover
+                border-color near-blue
+
+            &:focus
+                border-color nearer-blue
+
+        input[type='submit']
+            margin-left 5px
             font-size 18px
+            background-color peach-dream-machine
+            cursor pointer
+            transition background-color 0.2s
+            -webkit-transition background-color 0.2s
+
+            &:hover
+                background-color lighter-dream

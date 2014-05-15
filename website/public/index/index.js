@@ -44,16 +44,19 @@ $('.info-bg').click(function() {
     }, 0);
 });
 
+var tweetNum = 0;
 function randomTweet() {
     var domain = $('.info .title').text();
     var tweets = [
-        'Considering buying {{d}}',
+        'Considering buying {{d}}.',
         "Can't believe {{d}} isn't taken yet.",
-        'Domain of the year -> {{d}}',
-        'Buying {{d}} for... things.'
+        'Domain of the year -> {{d}}.',
+        'Buying {{d}} for... things.',
+        'Best domain ever purchased: {{d}}.',
     ];
-    var chosen = tweets[Math.floor(Math.random() * tweets.length)];
-    $('.info .tweet .text').val(chosen.replace('{{d}}', domain));
+    tweetNum++;
+    if(tweetNum >= tweets.length) tweetNum = 0;
+    $('.info .tweet .text').val(tweets[tweetNum].replace('{{d}}', domain));
 }
 
 $('.new-tweet').click(function() {
