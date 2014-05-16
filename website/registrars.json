@@ -13,7 +13,7 @@
     },
 
     "namecheap": {
-        "NOTE": "not currently using namecheap because it has a very limited range of tlds",
+        "NOTE": "not currently using namecheap",
         "link": "https://www.namecheap.com/domains/registration/results.aspx?domain={{d}}",
         "tlds": [
             "me", "pe", "fr", "ch", "co", "pw", "cm", "tv", "ca", "de", "us",
@@ -22,6 +22,7 @@
     },
 
     "name": {
+        "NOTE": "not currently using name.com",
         "link": "https://www.name.com/domain/search/?domain={{d}}",
         "tlds": [
             "tv", "co", "io", "me", "in", "us", "vc", "im", "ca", "eu", "mx",
@@ -33,6 +34,7 @@
 
     "iwantmyname": {
         "link": "https://iwantmyname.com/?domain={{d}}",
+        "afflink": "http://www.shareasale.com/r.cfm?u=950818&b=210518&m=25581&urllink=iwantmyname%2Ecom%3Fdomain%3D{{d}}",
         "tlds": [
             "co", "co", "me", "me", "io", "io", "us", "us", "ca", "ca", "ac",
             "ac", "af", "af", "ag", "ag", "am", "am", "as", "as", "at", "at",
@@ -53,6 +55,7 @@
 
     "onezeroone": {
         "link": "http://www.101domain.com/domain-availability-search.htm?q={{d}}",
+        "afflink": "http://www.101domain.com/affiliate/coffeecodecouch.html?q={{d}}",
         "tlds": [
             "ac", "ae", "af", "ag", "ai", "al", "am", "as", "at", "ax", "ba",
             "bb", "be", "bg", "bi", "bj", "bo", "bs", "by", "bz", "ca", "cc",

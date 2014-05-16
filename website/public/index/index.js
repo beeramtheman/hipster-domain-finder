@@ -1,4 +1,4 @@
-var registrars = JSON.parse(document.getElementById('registrars').innerHTML);
+var registrars = JSON.parse($('#registrars').attr('data-registrars'));
 
 function viewDomain() {
     var domain = this.href.split('#')[1];
@@ -9,7 +9,7 @@ function viewDomain() {
 
     for(reg in registrars) {
         if(registrars[reg].tlds.indexOf(tld) > -1) {
-            var link = registrars[reg].link.replace('{{d}}', domain);
+            link = registrars[reg].link.replace('{{d}}', domain);
             $('.reg.' + reg).addClass('true');
             $('.reg.' + reg).attr('href', link);
             $('.reg.' + reg).attr('target', '_blank');
@@ -61,4 +61,12 @@ function randomTweet() {
 
 $('.new-tweet').click(function() {
     randomTweet();
+});
+
+$('.info .reg').click(function() {
+    var domain = $('.info .domain').text();
+    var reg = $(this).attr('data-reg');
+    if(registrars[reg].afflink) {
+        this.href = registrars[reg].afflink.replace('{{d}}', domain);
+    }
 });

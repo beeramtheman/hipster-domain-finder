@@ -1,6 +1,7 @@
 doctype html
 html(lang="en")
   head
+    meta(name='viewport' content='width=device-width, initial-scale=1')
     title Hipster Domain Finder
     link(href='http://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet')
     link(href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet')
@@ -80,10 +81,9 @@ html(lang="en")
       .content
         div.list
           | Buy: 
-          a.reg.gandi(href='#') Gandi
-          a.reg.iwantmyname(href='#') iWantMyName
-          a.reg.name(href='#') Name.com
-          a.reg.onezeroone(href='#') 101domain
+          a.reg.gandi(href='#' data-reg='gandi') Gandi
+          a.reg.iwantmyname(href='#' data-reg='iwantmyname') iWantMyName
+          a.reg.onezeroone(href='#' data-reg='onezeroone') 101domain
         br
         | Tweet about this domain:
         br
@@ -93,7 +93,7 @@ html(lang="en")
           input(type='hidden' name='url' value='http://www.hipsterdomainfinder.com')
           input(type='submit' value='tweet')
 
-    #registrars(style='display:none')=registrars
+    #registrars(style='display:none' data-registrars=registrars)
     script(src='/resources/jquery.min.js')
     script(src='/index/index.js')
 
