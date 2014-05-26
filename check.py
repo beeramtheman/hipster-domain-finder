@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# command -> ./check.py <gandi API key>
+# command -> ./check.py --key=<gandi API key>
 # note: requires gandi corporate account for access to all TLD's in API
 
 import argparse
