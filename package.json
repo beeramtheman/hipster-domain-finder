@@ -1,0 +1,25 @@
+{
+  "name": "hipster-domain-finder",
+  "version": "0.0.1",
+  "description": "Find OG domain hacks with [Hipster Domain Finder](http://www.hipsterdomainfinder.com).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coffeecodecouch/hipster-domain-finder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coffeecodecouch/hipster-domain-finder/issues"
+  },
+  "homepage": "https://github.com/coffeecodecouch/hipster-domain-finder",
+  "dependencies": {
+    "express": "~4.3.1",
+    "jade": "~1.3.1",
+    "mongoose": "~3.8.11",
+    "stylus": "~0.45.1"
+  }
+}
