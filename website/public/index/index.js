@@ -70,3 +70,10 @@ $('.info .reg').click(function() {
         this.href = registrars[reg].afflink.replace('{{d}}', domain);
     }
 });
+
+$('form[name="filter"]').submit(function(e){
+  e.preventDefault();
+  var filterVal = $(this).find('input[name="filterVal"]').val();
+  var filterType = $(this).find('input[name=filter]:checked').val();
+  window.location = '/' + filterType + '/' + filterVal;
+});

@@ -40,13 +40,47 @@ app.get('/p/:page', function(req, res) {
     }
 });
 
-function sendPage(res, page) {
-    Domain.find().limit(60).skip((page - 1) * 60).sort('length').sort('name')
+// Filter by TLD
+app.get('/tld', function(req, res) {
+    res.redirect('/');
+});
+
+app.get('/tld/:tld', function(req, res) {
+    var tld = req.params.tld;
+    sendPage(res, 1, {tld: tld}, '/tld/' + tld);
+});
+
+app.get('/tld/:tld/p/:page', function(req, res) {
+    var tld = req.params.tld;
+    sendPage(res, req.params.page, {tld: tld}, '/tld/' + tld);
+});
+
+// Filter by length
+app.get('/length', function(req, res) {
+    res.redirect('/');
+});
+
+app.get('/length/:len', function(req, res) {
+    var len = parseInt(req.params.len, 10);
+    sendPage(res, 1, {length: len}, '/length/' + len);
+});
+
+app.get('/length/:len/p/:page', function(req, res) {
+    var len = parseInt(req.params.len, 10);
+    sendPage(res, req.params.page, {length: len}, '/length/' + len);
+});
+
+function sendPage(res, page, query, paginationPrefix) {
+    query = query || {};
+    paginationPrefix = paginationPrefix || '';
+
+    Domain.find(query).limit(60).skip((page - 1) * 60).sort('length').sort('name')
         .exec(function(err, domains) {
             if(err) domains = [{name: 'database error'}];
             res.render('index', {
                 domains: domains,
                 registrars: registrars,
+                paginationPrefix: paginationPrefix,
                 page: page
             });
         }

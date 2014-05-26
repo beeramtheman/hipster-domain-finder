@@ -49,11 +49,11 @@ html(lang="en")
           - }
       - }
     .page
-      - var prev = parseInt(page) - 1
-      - var next = parseInt(page) + 1
+      - var prev = parseInt(page, 10) - 1
+      - var next = parseInt(page, 10) + 1
 
       - if(page > 1) {
-        a(href='/p/' + prev) prev
+        a(href=paginationPrefix + '/p/' + prev) prev
       - }
       - else {
         a.dull prev
@@ -62,11 +62,21 @@ html(lang="en")
       .num=page
 
       - if(domains.length == 60) {
-        a(href='/p/' + next) next
+        a(href=paginationPrefix + '/p/' + next) next
       - }
       - else {
         a.dull no more :(
       - }
+    .filter
+      form(name='filter')
+        input(name='filterVal', placeholder="Filter")
+        label(name='tld')
+          input(type='radio', name='filter', value='tld', checked='checked') 
+          | TLD
+        label(name='length')
+          input(type='radio', name='filter', value='length')
+          | Length
+        input(type='submit')
     a.twitter(href='https://twitter.com/coffeecodecouch')
       img(src='/resources/twitter.png')
     .footer
