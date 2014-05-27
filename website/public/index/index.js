@@ -71,9 +71,10 @@ $('.info .reg').click(function() {
     }
 });
 
-$('form[name="filter"]').submit(function(e){
-  e.preventDefault();
-  var filterVal = $(this).find('input[name="filterVal"]').val();
-  var filterType = $(this).find('input[name=filter]:checked').val();
-  window.location = '/' + filterType + '/' + filterVal;
+$('select[name="filterTLD"]').on('change', function() {
+  var location = '/';
+  if ($(this).val()) {
+    location = '/tld/' + $(this).val();
+  }
+  window.location = location;
 });

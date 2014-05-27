@@ -22,6 +22,7 @@ var Domain = mongoose.model('Domain', {
 });
 
 var registrars = fs.readFileSync(__dirname + '/registrars.json', 'utf8');
+var tlds = JSON.parse(fs.readFileSync(__dirname + '/tlds.json', 'utf8'));
 
 app.get('/', function(req, res) {
     sendPage(res, 1);
@@ -55,21 +56,6 @@ app.get('/tld/:tld/p/:page', function(req, res) {
     sendPage(res, req.params.page, {tld: tld}, '/tld/' + tld);
 });
 
-// Filter by length
-app.get('/length', function(req, res) {
-    res.redirect('/');
-});
-
-app.get('/length/:len', function(req, res) {
-    var len = parseInt(req.params.len, 10);
-    sendPage(res, 1, {length: len}, '/length/' + len);
-});
-
-app.get('/length/:len/p/:page', function(req, res) {
-    var len = parseInt(req.params.len, 10);
-    sendPage(res, req.params.page, {length: len}, '/length/' + len);
-});
-
 function sendPage(res, page, query, paginationPrefix) {
     query = query || {};
     paginationPrefix = paginationPrefix || '';
@@ -80,6 +66,7 @@ function sendPage(res, page, query, paginationPrefix) {
             res.render('index', {
                 domains: domains,
                 registrars: registrars,
+                tlds: tlds,
                 paginationPrefix: paginationPrefix,
                 page: page
             });
