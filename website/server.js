@@ -22,6 +22,7 @@ var Domain = mongoose.model('Domain', {
 });
 
 var registrars = fs.readFileSync(__dirname + '/registrars.json', 'utf8');
+var tlds = JSON.parse(fs.readFileSync(__dirname + '/tlds.json', 'utf8'));
 
 app.get('/', function(req, res) {
     sendPage(res, 1);
@@ -40,13 +41,33 @@ app.get('/p/:page', function(req, res) {
     }
 });
 
-function sendPage(res, page) {
-    Domain.find().limit(60).skip((page - 1) * 60).sort('length').sort('name')
+// Filter by TLD
+app.get('/tld', function(req, res) {
+    res.redirect('/');
+});
+
+app.get('/tld/:tld', function(req, res) {
+    var tld = req.params.tld;
+    sendPage(res, 1, {tld: tld}, '/tld/' + tld);
+});
+
+app.get('/tld/:tld/p/:page', function(req, res) {
+    var tld = req.params.tld;
+    sendPage(res, req.params.page, {tld: tld}, '/tld/' + tld);
+});
+
+function sendPage(res, page, query, paginationPrefix) {
+    query = query || {};
+    paginationPrefix = paginationPrefix || '';
+
+    Domain.find(query).limit(60).skip((page - 1) * 60).sort('length').sort('name')
         .exec(function(err, domains) {
             if(err) domains = [{name: 'database error'}];
             res.render('index', {
                 domains: domains,
                 registrars: registrars,
+                tlds: tlds,
+                paginationPrefix: paginationPrefix,
                 page: page
             });
         }

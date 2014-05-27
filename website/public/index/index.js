@@ -70,3 +70,11 @@ $('.info .reg').click(function() {
         this.href = registrars[reg].afflink.replace('{{d}}', domain);
     }
 });
+
+$('select[name="filterTLD"]').on('change', function() {
+  var location = '/';
+  if ($(this).val()) {
+    location = '/tld/' + $(this).val();
+  }
+  window.location = location;
+});

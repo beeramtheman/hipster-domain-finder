@@ -29,6 +29,15 @@ html(lang="en")
         a(href='https://github.com/coffeecodecouch/hipster-domain-finder/issues/10')
           | Help build non-JS support
         | .
+    .filter
+      label
+      - var currentTld = (paginationPrefix.split('/').length > 2) ? paginationPrefix.split('/')[2] : null;
+        span Filter by TLD:
+        select(name='filterTLD')
+          option
+          each tld in tlds
+            - var select=null; if (tld == currentTld) select='selected';
+            option(selected=select)= tld
     .list
       - for (var i = 0; i < domains.length; i += 3) {
         - if(i != 0 && i % 12 == 0) {
@@ -49,11 +58,11 @@ html(lang="en")
           - }
       - }
     .page
-      - var prev = parseInt(page) - 1
-      - var next = parseInt(page) + 1
+      - var prev = parseInt(page, 10) - 1
+      - var next = parseInt(page, 10) + 1
 
       - if(page > 1) {
-        a(href='/p/' + prev) prev
+        a(href=paginationPrefix + '/p/' + prev) prev
       - }
       - else {
         a.dull prev
@@ -62,7 +71,7 @@ html(lang="en")
       .num=page
 
       - if(domains.length == 60) {
-        a(href='/p/' + next) next
+        a(href=paginationPrefix + '/p/' + next) next
       - }
       - else {
         a.dull no more :(
