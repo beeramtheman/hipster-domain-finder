@@ -34,7 +34,7 @@ app.get('/p', function(req, res) {
 
 app.get('/p/:page', function(req, res) {
     if(req.query.d) {
-        // send page with SmartRegistrar box pre-loaded (not JS)
+        // TODO: send page with registrar box pre-loaded (not JS)
     }
     else {
         sendPage(res, req.params.page);
@@ -74,4 +74,4 @@ function sendPage(res, page, query, paginationPrefix) {
     );
 }
 
-app.listen(3001);
+app.listen(4005);
