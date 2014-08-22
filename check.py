@@ -22,11 +22,9 @@ def find_domains():
             if i % 100 == 0:
                 sys.stdout.write('\r' + str(i).ljust(6) + ' / 50000')
                 sys.stdout.flush()
+
             word = line.strip('\n').lower()
             chars = list(word)
-
-            if i > 4000:
-                break
 
             if word.endswith(tlds):
                 end = next((suf for suf in tlds if word.endswith(suf)), None)
