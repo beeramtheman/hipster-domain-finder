@@ -1,14 +1,12 @@
 # Hipster Domain Finder
 
-## Hipster Domain Finder is no longer active!
-## Anyone may fork this repo and host it themselves.
+### Hipster Domain Finder is no longer active!
+### Anyone may fork this repo and host it themselves.
 
 Find OG domain hacks with [Hipster Domain
 Finder](http://www.hipsterdomainfinder.com).
 
 [HN Discussion](https://news.ycombinator.com/item?id=7707100)
-
-![logo](http://www.hipsterdomainfinder.com/resources/hipster.png)
 
 
 ## Installation
