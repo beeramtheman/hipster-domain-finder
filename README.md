@@ -1,13 +1,10 @@
 # Hipster Domain Finder
 
+## Hipster Domain Finder is no longer active!
+## Anyone may fork this repo and host it themselves.
+
 Find OG domain hacks with [Hipster Domain
 Finder](http://www.hipsterdomainfinder.com).
-
-Current hacks:
-
-- er -> r (ex: tumbler -> tumblr.com)
-
-- tld in word (ex: lobsters -> lobste.rs)
 
 [HN Discussion](https://news.ycombinator.com/item?id=7707100)
 
@@ -36,7 +33,7 @@ npm install
 
 #### Querying domains and building database
 
-- Obtain a production API key from gandi (used during the XML RPC methods)
+- Obtain a corporate production API key from gandi (used during the XML RPC methods)
 - Run:
 ```
 python check.py --key=<API-key>
