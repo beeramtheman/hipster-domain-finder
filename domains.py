@@ -56,7 +56,7 @@ def status(domains):
     bad_codes = 0
 
     while True:
-        r = requests.get(base + 'status', params=payload, verify=False)
+        r = requests.get(base + 'status', params=payload)
 
         # temporarily allow 504 while Domainr fixes issues
         if r.status_code == 504:
