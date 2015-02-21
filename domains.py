@@ -8,11 +8,6 @@ import logging
 config = SafeConfigParser()
 config.read('config.ini')
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-    filename='domains.log',
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.DEBUG
-)
 
 class NetworkError(RuntimeError):
     def __init__(self, arg):
@@ -78,6 +73,3 @@ def status(domains):
         else:
             logger.info('Domainr "status" returned 200')
             return r.json()['status']
-
-def available(statuses):
-    return [s['domain'] for s in statuses if s['summary'] == 'inactive']
