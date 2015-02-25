@@ -1,5 +1,5 @@
 from configparser import SafeConfigParser
-from bottle import route, run, template, static_file
+from bottle import route, run, template, static_file, redirect
 from pymongo import MongoClient
 
 config = SafeConfigParser()
@@ -14,8 +14,7 @@ def index():
     return template(
         'index',
         page=1,
-        domains=domains,
-        register=config.get('domains', 'register')
+        domains=domains
     )
 
 @route('/<page:re:\d+>')
@@ -31,9 +30,13 @@ def page(page):
     return template(
         'index',
         page=int(page),
-        domains=domains,
-        register=config.get('domains', 'register')
+        domains=domains
     )
+
+@route('/register/:domain')
+def register(domain):
+    # lol
+    redirect(config.get('register', '101domain').replace('{{d}}', domain))
 
 @route('/static/<fn>')
 def static(fn):
