@@ -13,7 +13,7 @@ def update_domain(domain, status):
     logger.debug('Updating %s to %s', domain, status)
 
     operation = db.domains.update({'domain': domain}, {
-        '$set': {'status': status},
+        '$set': {'status': status, 'length': len(domain)},
         '$push': {'history': {'status': status, 'date': datetime.now()}}
     }, upsert=True)
 

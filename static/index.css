@@ -1,0 +1,108 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    font-family: Verdana, Geneva, sans-serif
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+.template {
+    display: none;
+}
+
+.wrap {
+    width: 500px;
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 500px) {
+    .wrap {
+        box-sizing: border-box;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+    }
+}
+
+header .title {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #eee;
+}
+
+header .subtitle {
+    padding: 10px 10px 30px 10px;
+}
+
+main .domain {
+    display: block;
+    height: 50px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-top: -1px;
+    line-height: 50px;
+    text-align: center;
+    color: inherit;
+}
+
+main .domain:hover {
+    background-color: #eee;
+}
+
+nav {
+    height: 60px;
+    line-height: 60px;
+    text-align: center
+}
+
+nav .side {
+    display: block;
+    float: right;
+    width: 50%;
+    color: inherit;
+}
+
+nav .side:hover {
+    background-color: #eee;
+}
+
+.mailing {
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.mailing input {
+    width: calc(100% - 30px);
+    height: 50px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.mailing input[type='email'] {
+    margin: 10px 0;
+    border: 2px solid gray;
+}
+
+.mailing input[type='submit'] {
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+}
+
+footer {
+    margin: 20px;
+    text-align: center;
+}
