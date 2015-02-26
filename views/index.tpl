@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hipster Domain Finder - Obscure domain hacks</title>
+    <title>Hipster Domain Finder - Real word domain hacks</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="/static/index.css">
 </head>
 <body>
     <div class="wrap">
         <header>
-            <div class="title">Hipster Domain Finder</div>
+            <a href="/" class="title">Hipster Domain Finder</a>
             <div class="subtitle">
-                Dot-com is so mainstream, find obscure domain hacks with Hipster Domain Finder.
+                Dot-com is so mainstream, find real word domain hacks with Hipster Domain Finder.
                 <a href="https://github.com/bramgg/hipster-domain-finder">Read more on GitHub</a>.
             </div>
         </header>

@@ -5,12 +5,17 @@ html, body {
 body {
     min-width: 320px;
     margin: 0;
-    font-family: Verdana, Geneva, sans-serif
+    font-family: 'Open Sans', Verdana, Geneva, sans-serif;
+    background-color: #F4F9F2;
+}
+
+* {
+    color: #262626;
 }
 
 a {
     text-decoration: none;
-    color: blue;
+    color: #3c67dd;
 }
 
 .template {
@@ -22,21 +27,26 @@ a {
     max-width: 100%;
     min-height: 100%;
     margin: 0 auto;
+    background-color: #fff;
 }
 
 @media (min-width: 500px) {
     .wrap {
         box-sizing: border-box;
-        border-left: 1px solid gray;
-        border-right: 1px solid gray;
+        border-left: 1px solid #808080;
+        border-right: 1px solid #808080;
     }
 }
 
 header .title {
-    height: 50px;
-    line-height: 50px;
+    display: block;
+    height: 80px;
+    line-height: 75px;
+    background-color: #E5DDB6;
     text-align: center;
-    background-color: #eee;
+    font-size: 30px;
+    color: white;
+    text-shadow: 2px 2px 2px #282828;
 }
 
 header .subtitle {
@@ -80,6 +90,7 @@ nav .side:hover {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     text-align: center;
+    background-color: #f2f8f3;
 }
 
 .mailing input {
@@ -93,16 +104,19 @@ nav .side:hover {
 
 .mailing input[type='email'] {
     margin: 10px 0;
-    border: 2px solid gray;
+    border: 2px solid #afd5ba;
+    background-color: #fcfdfc;
 }
 
 .mailing input[type='submit'] {
     padding: 10px;
     border: 0;
     cursor: pointer;
+    background-color: #cb9a9a;
+    color: #fdfcfc;
 }
 
 footer {
-    margin: 20px;
+    padding: 20px;
     text-align: center;
 }
