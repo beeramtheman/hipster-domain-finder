@@ -17,6 +17,7 @@ installed are:
 
 - requests
 - pymongo
+- bottle
 
 HDF is ready to be used locally out of the box. Just run
 [populate_db.py][populate_db] to populate the database with 100 domain hacks.
