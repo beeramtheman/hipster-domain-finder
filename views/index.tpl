@@ -5,6 +5,7 @@
     <title>Hipster Domain Finder - Real word domain hacks</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="/static/index.css">
+    <link rel="icon" type="image/png" href="/static/logo.png">
 </head>
 <body>
     <div class="wrap">
