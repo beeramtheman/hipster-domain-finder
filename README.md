@@ -40,7 +40,8 @@ simple as changing [words.txt][words].
 
 HDF's official website is intentionally very simple inside and out.
 [website.py][website] handles routing and serving dynamic/static content. HTML
-is in [views][views] and CSS is in [static][static].
+is in [views][views] and CSS is in [static][static]. Colour scheme is based on
+[praxicalidocious][praxicalidocious]'s [Winter Wolves palette][palette].
 
 [hdf]: http://www.hipsterdomainfinder.com
 [screenshot]: screenshot.png
@@ -52,3 +53,5 @@ is in [views][views] and CSS is in [static][static].
 [website]: website.py
 [views]: views
 [static]: static
+[praxicalidocious]: http://www.colourlovers.com/lover/praxicalidocious
+[palette]: http://www.colourlovers.com/palette/3636384/Winter_Wolves
