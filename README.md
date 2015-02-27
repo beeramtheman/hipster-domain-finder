@@ -16,7 +16,6 @@ Requirements for HDF are Python 3 and MongoDB. Python modules that must be
 installed are:
 
 - requests
-- configparser
 - pymongo
 
 HDF is ready to be used locally out of the box. Just run
