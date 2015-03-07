@@ -88,7 +88,6 @@ nav .side:hover {
 .mailing {
     padding: 20px 0;
     border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     text-align: center;
     background-color: #f2f8f3;
 }
@@ -114,6 +113,14 @@ nav .side:hover {
     cursor: pointer;
     background-color: #cb9a9a;
     color: #fdfcfc;
+}
+
+.purchased {
+    padding: 10px;
+    background-color: #808080;
+    text-align: center;
+    font-size: 12px;
+    color: #f5f5f5;
 }
 
 footer {

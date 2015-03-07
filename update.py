@@ -2,7 +2,7 @@ import domains
 from configparser import SafeConfigParser
 from pymongo import MongoClient
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 config = SafeConfigParser()
 config.read('config.ini')
@@ -40,6 +40,31 @@ def update_all():
 
     logger.info('Finished updating all domains')
 
+def mark_purchased():
+    # a simpler way exists, somewhere.
+    logger.info('Marking domains as purchased during last week or not')
+
+    db.domains.update({}, {'$set': {'purchased_this_week': False}}, multi=True)
+    week_ago = datetime.today() - timedelta(days=7)
+
+    purchased = {
+        'history': {
+            '$elemMatch': {
+                'status': 'inactive',
+                'date': {'$gte': week_ago}
+            }
+        },
+        'status': 'active'
+    }
+
+    db.domains.update(
+        purchased,
+        {'$set': {'purchased_this_week': True}},
+        multi=True
+    )
+
+    logger.info('Finished marking domains as purchased')
+
 def main():
     logging.basicConfig(
         filename='update.log',
@@ -48,6 +73,7 @@ def main():
     )
 
     update_all()
+    mark_purchased()
 
 if __name__ == '__main__':
     main()

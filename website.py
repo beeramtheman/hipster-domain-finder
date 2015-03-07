@@ -8,13 +8,17 @@ db = MongoClient()[config.get('mongodb', 'db_name')]
 
 @route('/')
 def index():
-    query = db.domains.find({'status': 'inactive'}).sort('length').limit(30)
-    domains = [ d['domain'] for d in query]
+    domains = [ d['domain'] for d in db.domains.find({'status': 'inactive'})
+                .sort('length').limit(30) ]
+
+    purchased = [ d['domain'] for d in
+                  db.domains.find({'purchased_this_week': True}) ]
 
     return template(
         'index',
         page=1,
-        domains=domains
+        domains=domains,
+        purchased=purchased
     )
 
 @route('/<page:re:\d+>')
@@ -27,10 +31,14 @@ def page(page):
     domains = [ d['domain'] for d in db.domains.find({'status': 'inactive'})
                 .sort('length').skip(index * 30).limit(30) ]
 
+    purchased = [ d['domain'] for d in
+                  db.domains.find({'purchased_this_week': True}) ]
+
     return template(
         'index',
         page=int(page),
-        domains=domains
+        domains=domains,
+        purchased=purchased
     )
 
 @route('/register/:domain')

@@ -40,13 +40,15 @@
             </form>
         </section>
 
+        <section class="purchased">
+            {{len(purchased)}} Hipster Domains purchased this week.
+            <br>
+            {{', '.join(purchased)}}
+        </section>
+
         <footer>
             Portland made, <a href="https://domainr.com/">Domainr</a> powered.
         </footer>
-    </div>
-
-    <div class="template expansionTemp">
-        [purchase options placeholder]
     </div>
 </body>
 </html>
