@@ -5,6 +5,7 @@ from pymongo import MongoClient
 config = SafeConfigParser()
 config.read('config.ini')
 db = MongoClient()[config.get('mongodb', 'db_name')]
+register_count = 0
 
 @route('/')
 def index():
@@ -43,8 +44,17 @@ def page(page):
 
 @route('/register/:domain')
 def register(domain):
-    # lol
-    redirect(config.get('register', '101domain').replace('{{d}}', domain))
+    global register_count
+    register_count += 1
+
+    # for Domainr API access
+    if register_count == 5:
+        redirect(config.get('register', 'domainr').replace('{{d}}', domain))
+        register_count = 0
+
+    else:
+        redirect(config.get('register', '101domain').replace('{{d}}', domain))
+        register_count += 1
 
 @route('/static/<fn>')
 def static(fn):
