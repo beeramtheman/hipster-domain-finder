@@ -48,7 +48,7 @@ def register(domain):
     register_count += 1
 
     # for Domainr API access
-    if register_count == 5:
+    if register_count >= 5:
         redirect(config.get('register', 'domainr').replace('{{d}}', domain))
         register_count = 0
 
