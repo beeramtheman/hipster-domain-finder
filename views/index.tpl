@@ -48,6 +48,8 @@
 
         <footer>
             Portland made, <a href="https://domainr.com/">Domainr</a> powered.
+            <br><br>
+            By <a href="http://www.bram.gg/">Bram Hoskin</a>.
         </footer>
     </div>
 </body>
