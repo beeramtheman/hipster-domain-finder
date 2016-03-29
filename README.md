@@ -1,3 +1,5 @@
+# This repository is outdated. New Repository: https://github.com/djh-/hipster-domain-finder
+
 # Hipster Domain Finder 2.0
 
 ![screenshot][screenshot]
